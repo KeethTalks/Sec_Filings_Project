@@ -20,10 +20,10 @@ fullTextSearchApi = FullTextSearchApi(api_key=API_KEY)
 
 # Define the search query parameters
 query = {
-    "query": "Bitcoin OR Ethereum OR Cryptocurrency OR Blockchain OR DeFi",  # Search for these keywords
+    "query": "Bitcoin OR Ethereum OR Solana OR Cryptocurrency",  # Search for these keywords
     "formTypes": ["8-K", "10-Q", "10-K"],       # Limit to these filing types
-    "startDate": "2025-06-01",                  # Start date for the search
-    "endDate": "2025-06-16",                    # End date (adjust as needed)
+    "startDate": "2025-06-16",                  # Start date for the search
+    "endDate": "2025-06-17",                    # End date (adjust as needed)
     "size": 10                                  # Limit to 10 results
 }
 
@@ -35,17 +35,17 @@ try:
     if filings["filings"]:
         print("Found filings:")
         for filing in filings["filings"]:
-            # Extract key details, using defaults if data is missing
-            ticker = filing.get("ticker", "N/A")
-            form_type = filing["formType"]
-            company_name = filing["companyName"]
-            filed_at = filing["filedAt"]
-            url = filing["linkToFilingDetails"]
+            # Extract key details, using .get() with defaults if data is missing
+            ticker = filing.get("ticker", "N/A")                  # Ticker symbol, defaults to "N/A"
+            form_type = filing.get("formType", "Unknown")         # Form type, defaults to "Unknown"
+            company_name_long = filing.get("companyNameLong", "Unknown")  # Company name, defaults to "Unknown"
+            filed_at = filing.get("filedAt", "Unknown")           # Filing date, defaults to "Unknown"
+            url = filing.get("filingUrl", "N/A")                  # Filing URL, defaults to "N/A"
             
             # Display the details in the terminal
             print(f"- Ticker: {ticker}")
             print(f"  Form Type: {form_type}")
-            print(f"  Company: {company_name}")
+            print(f"  Company: {company_name_long}")
             print(f"  Filed At: {filed_at}")
             print(f"  URL: {url}")
             print("---")
