@@ -1,3 +1,5 @@
 .env
 filings.json
 venv/
+__pycache__/
+*.pyc
